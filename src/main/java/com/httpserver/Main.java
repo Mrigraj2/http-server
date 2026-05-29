@@ -12,6 +12,8 @@ public class Main {
         while(true){
             con.acceptConnection();
             con.readConnection();
+            con.returnData();
+            con.closeConnection();
         }
     }
 }

@@ -30,5 +30,22 @@ public class Connection {
         while ((line = reader.readLine()) != null && !line.isEmpty()) {
             System.out.println(line);
         }
+        System.out.println("--------------------------------------------");
+    }
+
+    protected void returnData() throws IOException {
+        OutputStream os = client.getOutputStream();
+        String response =
+                "HTTP/1.1 200 OK\r\n" +
+                        "Content-Type: text/plain\r\n" +
+                        "Content-Length: 11\r\n" +
+                        "\r\n" +
+                        "Hello World";
+        os.write(response.getBytes());
+        os.flush();
+    }
+
+    protected void closeConnection() throws IOException {
+        client.close();
     }
 }
