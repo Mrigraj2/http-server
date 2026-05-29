@@ -14,6 +14,7 @@ public class Main {
             con.readConnection();
             con.returnData();
             con.closeConnection();
+            con.client.close();
         }
     }
 }

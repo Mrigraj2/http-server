@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Connection {
 
@@ -34,13 +36,20 @@ public class Connection {
     }
 
     protected void returnData() throws IOException {
+
         OutputStream os = client.getOutputStream();
+
+        String html = Files.readString(
+                Path.of("D:\\codes\\SpringProjects\\http-server\\src\\main\\java\\com\\httpserver\\index.html")
+        );
+
         String response =
                 "HTTP/1.1 200 OK\r\n" +
-                        "Content-Type: text/plain\r\n" +
-                        "Content-Length: 11\r\n" +
+                        "Content-Type: text/html\r\n" +
+                        "Content-Length: " + html.getBytes().length + "\r\n" +
                         "\r\n" +
-                        "Hello World";
+                        html;
+
         os.write(response.getBytes());
         os.flush();
     }
